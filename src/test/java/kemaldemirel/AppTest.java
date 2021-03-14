@@ -10,31 +10,57 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
-    }
+
     @Test
-    public void testFound() {
-       ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
-       assertTrue(App.search(array, 4));
+    public void sizeTest() {
+       ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7));
+       int number = 4;
+       Integer tempNumber = number;
+       assertThrows(IndexOutOfBoundsException.class,() ->{App.indexSum(array, 2, tempNumber,20 );});
      }
  
      @Test
-     public void testNotFound() {
-       ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
-       assertFalse(App.search(array, 5));
+     public void nullTest() 
+     {
+       ArrayList<Integer> array = null;
+       int number = 4;
+       Integer tempNumber = number;
+       assertThrows(NullPointerException.class,() -> { App.indexSum(array, 2, tempNumber, 3); });
      }
- 
      @Test
-     public void testEmptyArray() {
-       ArrayList<Integer> array = new ArrayList<>();
-       assertFalse(App.search(array, 1));
-     }
- 
-     @Test
-     public void testNull() {
-       assertFalse(App.search(null, 1));
-     }
- 
+     public void workingCorrectlyTest() 
+     {
+        ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7));
+        int number = 4;
+        Integer tempNumber = number;
+        try
+        {
+            assertEquals(12,App.indexSum(array, 2, tempNumber,3 ));
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+    public void wrongInputTest()
+    {
+        ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7));
+        int number = 4;
+        Integer tempNumber = number;
+        assertThrows(IndexOutOfBoundsException.class,() -> { App.indexSum(array, -2, tempNumber, -3); });
+    }
+     @Test void emptyArrayTest() 
+     {
+        ArrayList<Integer> array = new ArrayList<Integer>();        
+        int number = 0;
+        Integer tempNumber = number;
+        try
+        {
+            assertThrows(NullPointerException.class, () -> { App.indexSum(array, 0,tempNumber ,0); });
+        }catch(Exception e)
+        {
+            System.out.println(e);
+        }
+
+    }
 }
