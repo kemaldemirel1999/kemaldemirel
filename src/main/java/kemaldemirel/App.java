@@ -1,5 +1,6 @@
 package kemaldemirel;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import static spark.Spark.get;
 import static spark.Spark.port;
 import static spark.Spark.post;
